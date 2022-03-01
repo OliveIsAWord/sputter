@@ -41,18 +41,18 @@ pub fn eval(v: Value) -> Value {
         _ => return Expr(evaled_terms),
     }
 }
-
-pub fn num_oper<F: Fn(i64, i64) -> i64>(func: F, args: &[Value]) -> Result<Value> {
+use num_bigint::BigInt;
+pub fn num_oper<F: Fn(BigInt, BigInt) -> BigInt>(func: F, args: &[Value]) -> Result<Value> {
     assert!(!args.is_empty());
     use Value::*;
-    let mut cumulative = if let Int(num) = args[0] {
+    let mut cumulative = if let Int(num) = args[0].clone() {
         num
     } else {
         return Err(BadArgument(0));
     };
     for (i, arg) in args[1..].iter().enumerate() {
         if let Int(num) = arg {
-            cumulative = func(cumulative, *num);
+            cumulative = func(cumulative, num.clone());
         } else {
             return Err(BadArgument(i + 1));
         }

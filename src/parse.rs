@@ -73,7 +73,7 @@ pub fn parse(s: &str) -> Result<Value> {
 }
 
 fn string_to_value(x: String) -> Value {
-    if let Ok(num) = x.parse::<i64>() {
+    if let Ok(num) = x.parse() {
         Value::Int(num)
     } else {
         let mut ident = x;
