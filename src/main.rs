@@ -18,6 +18,10 @@ fn main() -> io::Result<()> {
         if code_line.trim() == "quit" {
             break;
         }
+        if code_line.trim() == "help" {
+            println!("Good luck.");
+            continue;
+        }
         let program = match parse(&code_line) {
             Ok(x) => x,
             Err(e) => {
