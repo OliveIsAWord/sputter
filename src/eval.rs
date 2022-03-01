@@ -38,7 +38,7 @@ pub fn eval(v: Value) -> Value {
         "-" => num_oper(|x, y| x - y, args).unwrap(),
         "*" => num_oper(|x, y| x * y, args).unwrap(),
         "/" => num_oper(|x, y| x / y, args).unwrap(),
-        op => panic!("unrecognized operator `{}`", op),
+        _ => return Expr(evaled_terms),
     }
 }
 
