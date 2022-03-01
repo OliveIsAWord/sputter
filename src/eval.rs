@@ -42,7 +42,7 @@ pub fn eval(v: Value) -> Value {
     }
 }
 use num_bigint::BigInt;
-pub fn num_oper<F: Fn(BigInt, BigInt) -> BigInt>(func: F, args: &[Value]) -> Result<Value> {
+pub fn num_oper<F: Fn(&BigInt, &BigInt) -> BigInt>(func: F, args: &[Value]) -> Result<Value> {
     assert!(!args.is_empty());
     use Value::*;
     let mut cumulative = if let Int(num) = args[0].clone() {
@@ -52,7 +52,7 @@ pub fn num_oper<F: Fn(BigInt, BigInt) -> BigInt>(func: F, args: &[Value]) -> Res
     };
     for (i, arg) in args[1..].iter().enumerate() {
         if let Int(num) = arg {
-            cumulative = func(cumulative, num.clone());
+            cumulative = func(&cumulative, num);
         } else {
             return Err(BadArgument(i + 1));
         }
