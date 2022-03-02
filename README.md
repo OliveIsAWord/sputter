@@ -1,5 +1,5 @@
-# sputter
-A Lisp written in Rust.
+# Sputter
+A """Lisp""" written in Rust.
 
 It's not good at a lot of things! Try one of these:
 
